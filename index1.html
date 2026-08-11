@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pushpa's Home Kitchen</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent-color: #e65100;
+            --text-color: #ffffff;
+            --text-muted: #b0bec5;
+            --border-color: #333333;
+            --whatsapp-green: #25D366;
+            --swiggy-orange: #fc8019;
+            --peach-title: #ff9e7d;
+            --feature-card-bg: #181818;
+            --dark-red-bg: #3a110c;
+            --dark-red-card: #4a1811;
+            --maroon-accent: #800000;
+            --badge-orange: #e65100;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0 0 100px 0;
+        }
+
+        /* Header Layout */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background-color: #1a1a1a;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+        }
+
+        .brand-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            line-height: 1.1;
+        }
+
+        .brand-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            color: #ffa726;
+            text-transform: uppercase;
+        }
+
+        /* Hamburger Button */
+        .menu-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            padding: 0;
+        }
+
+        .menu-btn span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #a52a2a;
+            border-radius: 2px;
+        }
+
+        /* Navigation Dropdown Menu */
+        .nav-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 15px;
+            background-color: #240c09;
+            border: 1px solid #5e1c15;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+            width: 200px;
+            overflow: hidden;
+            z-index: 1001;
+        }
+
+        .nav-menu.show {
+            display: block;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 12px 18px;
+            color: #f0f0f0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #3b130e;
+            transition: background-color 0.2s ease;
+        }
+
+        .nav-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-menu a:hover {
+            background-color: #421611;
+            color: var(--peach-title);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Badge Tag */
+        .tag-badge {
+            display: inline-block;
+            background-color: #2b1d19;
+            color: #ff6b35;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Serif Heading Typography */
+        .hero-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--peach-title);
+            font-size: 2.4rem;
+            font-weight: normal;
+            line-height: 1.2;
+            margin: 0 0 15px 0;
+        }
+
+        .hero-desc {
+            color: #d1d1d1;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* Side-by-Side Trust Badges */
+        .trust-badges-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #282828;
+        }
+
+        .trust-badge-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .trust-badge-icon {
+            width: 22px;
+            height: 22px;
+            fill: var(--badge-orange);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .trust-badge-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #e0e0e0;
+            line-height: 1.25;
+        }
+
+        /* Hero Image Banner */
+        .hero-banner-wrapper {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .hero-banner-wrapper img {
+            width: 100%;
+            height: 320px;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Feature Differences Section */
+        .difference-section {
+            margin-bottom: 45px;
+            text-align: center;
+            scroll-margin-top: 90px;
+        }
+
+        .diff-subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: #ff6b35;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .diff-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--peach-title);
+            font-size: 2.2rem;
+            font-weight: normal;
+            margin: 0 0 30px 0;
+            line-height: 1.2;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        @media (max-width: 500px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .feature-card {
+            background-color: var(--feature-card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-icon-circle {
+            width: 60px;
+            height: 60px;
+            background-color: #26211f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--peach-title);
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .feature-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Explore Menu Banner */
+        .explore-banner {
+            text-align: center;
+            margin: 40px 0 30px 0;
+        }
+
+        .explore-subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: #ff6b35;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .explore-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--peach-title);
+            font-size: 2.5rem;
+            font-weight: normal;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        /* Order Sections */
+        .order-section {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            scroll-margin-top: 90px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* Menu Card Category */
+        .menu-category-card {
+            background-color: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .category-image-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .category-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .category-content {
+            padding: 20px;
+        }
+
+        .cat-card-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin: 0 0 8px 0;
+        }
+
+        .cat-card-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 0 0 20px 0;
+            line-height: 1.4;
+        }
+
+        .dish-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px dotted #333333;
+        }
+
+        .dish-row:last-child {
+            border-bottom: none;
+        }
+
+        .dish-name {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #efefef;
+        }
+
+        .dish-price {
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: var(--peach-title);
+        }
+
+        /* Full Width Swiggy Order Button */
+        .btn-swiggy-full {
+            display: block;
+            width: 100%;
+            background-color: var(--swiggy-orange);
+            color: #ffffff;
+            text-align: center;
+            padding: 14px 0;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(252, 128, 25, 0.3);
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Red Card Bulk Notice */
+        .bulk-notice-card {
+            background-color: var(--dark-red-card);
+            border: 1px solid #632218;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+
+        .bulk-notice-header {
+            color: #ff9e7d;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .bulk-notice-body {
+            color: #f0f0f0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .bulk-notice-sub {
+            color: #d1b1ab;
+            font-size: 0.85rem;
+            font-style: italic;
+            margin: 0;
+        }
+
+        /* Dark Red Gathering Box */
+        .gathering-section {
+            background-color: var(--dark-red-bg);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 35px;
+            border: 1px solid #521c15;
+            scroll-margin-top: 90px;
+        }
+
+        .gathering-subtitle {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: #ff9e7d;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .gathering-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #ffffff;
+            font-size: 2.1rem;
+            font-weight: normal;
+            line-height: 1.25;
+            margin: 0 0 25px 0;
+        }
+
+        .btn-whatsapp-full {
+            display: block;
+            width: 100%;
+            background-color: var(--whatsapp-green);
+            color: #ffffff;
+            text-align: center;
+            padding: 14px 0;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+
+        .btn-call-outline {
+            display: block;
+            width: 100%;
+            background: transparent;
+            border: 1px solid #777;
+            color: #ffffff;
+            text-align: center;
+            padding: 12px 0;
+            border-radius: 30px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-bottom: 0;
+            box-sizing: border-box;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .reviews-subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: #ff6b35;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .reviews-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--peach-title);
+            font-size: 2.3rem;
+            font-weight: normal;
+            margin: 0 0 25px 0;
+        }
+
+        .reviews-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .review-card {
+            background-color: #181818;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .star-rating {
+            color: #ffb400;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: #e0e0e0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .reviewer-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .reviewer-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #382d28;
+            color: #ff9e7d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .reviewer-name {
+            font-weight: bold;
+            color: #ffffff;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .reviewer-status {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .faq-subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: #ff6b35;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .faq-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--peach-title);
+            font-size: 2.2rem;
+            font-weight: normal;
+            margin: 0 0 25px 0;
+        }
+
+        .faq-item {
+            background-color: #181818;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .faq-header {
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #ffffff;
+        }
+
+        .faq-plus {
+            color: #ff6b35;
+            font-weight: bold;
+            font-size: 1.4rem;
+            transition: transform 0.3s ease;
+            line-height: 1;
+        }
+
+        .faq-item.active .faq-plus {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: #d1d1d1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 0 20px;
+            background-color: #141414;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 20px 18px 20px;
+            border-top: 1px solid #282828;
+        }
+
+        /* Footer Kitchen Info */
+        .footer-info-section {
+            background-color: #181210;
+            border-radius: 16px;
+            padding: 25px 20px;
+            margin-bottom: 30px;
+            border: 1px solid #33221d;
+        }
+
+        .footer-brand-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--peach-title);
+            font-size: 1.8rem;
+            margin: 0 0 12px 0;
+        }
+
+        .footer-brand-desc {
+            color: #d1d1d1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .footer-info-title {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--peach-title);
+            font-size: 1.5rem;
+            margin: 0 0 18px 0;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+            color: #e0e0e0;
+        }
+
+        .info-row a {
+            color: #ff9e7d;
+            text-decoration: underline;
+        }
+
+        /* Bottom Sticky Action Bar */
+        .bottom-action-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #121212;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 10px;
+            border-top: 1px solid #222222;
+            z-index: 1000;
+        }
+
+        .btn-call {
+            border: 1px solid var(--peach-title);
+            background: transparent;
+            color: var(--peach-title);
+            border-radius: 25px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+        }
+
+        .btn-whatsapp-pill {
+            background-color: var(--whatsapp-green);
+            color: #ffffff;
+            border-radius: 25px;
+            padding: 8px 18px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.1;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+
+        .btn-swiggy-pill {
+            background-color: var(--swiggy-orange);
+            color: #ffffff;
+            border-radius: 25px;
+            padding: 10px 22px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header with Logo & Hamburger Icon -->
+<header class="header">
+    <div class="header-brand">
+        <img src="logo.jpg" alt="Pushpa's Home Kitchen Logo" class="logo-img">
+        <div>
+            <div class="brand-title">Pushpa's</div>
+            <div class="brand-subtitle">HOME KITCHEN</div>
+        </div>
+    </div>
+    
+    <button class="menu-btn" id="menuToggle" aria-label="Toggle Navigation Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="nav-menu" id="navDropdown">
+        <a href="#swiggy-section" class="nav-link">Swiggy Order</a>
+        <a href="#whatsapp-section" class="nav-link">WhatsApp Order</a>
+        <a href="#bulk-section" class="nav-link">Bulk Orders</a>
+        <a href="#whyme-section" class="nav-link">Why Me</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <!-- Badge Tag -->
+    <div class="tag-badge">
+        🔥 Fresh Morning Sourced & Hand-Ground Masala
+    </div>
+
+    <h1 class="hero-title">
+        Authentic<br>Home-Style<br>Non-Veg & Veg
+    </h1>
+
+    <p class="hero-desc">
+        Traditional non-veg dishes simmered in home-ground spices and cooked fresh to order. From Natu Kodi Pulusu to dark slow-cooked Mutton, Liver, Boti & Paya.
+    </p>
+
+    <!-- Side-by-Side Trust Badges -->
+    <div class="trust-badges-wrapper">
+        <div class="trust-badge-item">
+            <svg class="trust-badge-icon" viewBox="0 0 24 24">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+            </svg>
+            <div class="trust-badge-text">
+                FSSAI<br>Certified
+            </div>
+        </div>
+
+        <div class="trust-badge-item">
+            <svg class="trust-badge-icon" viewBox="0 0 24 24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+            <div class="trust-badge-text">
+                100% Home Kitchen<br>Quality
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Banner Plate Image -->
+    <div class="hero-banner-wrapper">
+        <img src="hero.jpg" alt="Pushpa's Home Kitchen Thali">
+    </div>
+
+    <!-- The Pushpa's Kitchen Difference Section ("Why Me") -->
+    <section class="difference-section" id="whyme-section">
+        <div class="diff-subtitle">THE PUSHPA'S KITCHEN DIFFERENCE</div>
+        <h2 class="diff-title">Made Like Home, Served Fresh</h2>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon-circle">🥩</div>
+                <div class="feature-card-title">Fresh, Never Frozen</div>
+                <p class="feature-card-desc">
+                    Meat sourced every morning from trusted local suppliers — no frozen stock ever.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-circle">🌶️</div>
+                <div class="feature-card-title">Hand-Ground Masala</div>
+                <p class="feature-card-desc">
+                    Authentic recipes simmered in rich, hand-ground spices for true home-style flavor.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-circle">✨</div>
+                <div class="feature-card-title">Hygienically Prepared</div>
+                <p class="feature-card-desc">
+                    Clean, sanitized cloud kitchen environment following strict quality controls.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon-circle">🛵</div>
+                <div class="feature-card-title">Fast Delivery via Swiggy</div>
+                <p class="feature-card-desc">
+                    Packed hot and delivered fast right to your doorstep through Swiggy.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore Our Menu Title Header -->
+    <div class="explore-banner">
+        <div class="explore-subtitle">TASTE THE AUTHENTICITY</div>
+        <h2 class="explore-title">Explore Our Menu</h2>
+    </div>
+
+    <!-- ================= SWIGGY ORDER SECTION ================= -->
+    <section class="order-section" id="swiggy-section">
+        <h2 class="section-title">Swiggy Order</h2>
+
+        <!-- Chicken Specials -->
+        <div class="menu-category-card">
+            <div class="category-image-wrapper">
+                <img src="chicken-gravy.jpg" alt="Chicken Specials">
+            </div>
+            <div class="category-content">
+                <h3 class="cat-card-title">Chicken Specials</h3>
+                <p class="cat-card-desc">Country-chicken curries and fiery fries, simmered in hand-ground masala.</p>
+
+                <div class="dish-row">
+                    <span class="dish-name">Chicken Curry with Rice</span>
+                    <span class="dish-price">₹200</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Chicken Fry</span>
+                    <span class="dish-price">₹200</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Chicken Curry</span>
+                    <span class="dish-price">₹200</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Green Chicken Curry</span>
+                    <span class="dish-price">₹200</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Gongura Chicken & Rice</span>
+                    <span class="dish-price">₹200</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mutton Specials -->
+        <div class="menu-category-card">
+            <div class="category-image-wrapper">
+                <img src="mutton-gravy.jpg" alt="Mutton Specials">
+            </div>
+            <div class="category-content">
+                <h3 class="cat-card-title">Mutton Specials</h3>
+                <p class="cat-card-desc">Tender mutton slow-cooked till it falls off the bone — rich, dark, unforgettable.</p>
+
+                <div class="dish-row">
+                    <span class="dish-name">Thalkai kura & Rice (with Dal)</span>
+                    <span class="dish-price">₹200</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Thalkai kura</span>
+                    <span class="dish-price">₹250</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Mutton Curry & Rice (with Dal)</span>
+                    <span class="dish-price">₹350</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Mutton Fry & Rice (with Dal)</span>
+                    <span class="dish-price">₹350</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Mutton Dalcha & Rice</span>
+                    <span class="dish-price">₹350</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Keema & Brain Specials -->
+        <div class="menu-category-card">
+            <div class="category-image-wrapper">
+                <img src="keema-brain.jpg" alt="Keema & Brain Specials">
+            </div>
+            <div class="category-content">
+                <h3 class="cat-card-title">Keema & Brain Specials</h3>
+                <p class="cat-card-desc">Rich and aromatic minced meats and delicacies.</p>
+
+                <div class="dish-row">
+                    <span class="dish-name">Methi Kheema & Rice (with Dal)</span>
+                    <span class="dish-price">₹350</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Palak Kheema & Rice (with Dal)</span>
+                    <span class="dish-price">₹350</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Brain Fry (full)</span>
+                    <span class="dish-price">₹300</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Kheema Mutti - 10 Pcs</span>
+                    <span class="dish-price">₹250</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Boti & Liver Specials -->
+        <div class="menu-category-card">
+            <div class="category-image-wrapper">
+                <img src="boti-liver.jpg" alt="Boti & Liver Specials">
+            </div>
+            <div class="category-content">
+                <h3 class="cat-card-title">Boti & Liver Specials</h3>
+                <p class="cat-card-desc">Traditional favorites seasoned and fried to perfection.</p>
+
+                <div class="dish-row">
+                    <span class="dish-name">Liver Curry & Rice (with Dal)</span>
+                    <span class="dish-price">₹200</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Boti Curry with Rice (with Dal)</span>
+                    <span class="dish-price">₹200</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Boti Fry</span>
+                    <span class="dish-price">₹250</span>
+                </div>
+                <div class="dish-row">
+                    <span class="dish-name">Boti Liver Chakra</span>
+                    <span class="dish-price">₹300</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Swiggy Order Button -->
+        <a href="https://www.swiggy.com" target="_blank" class="btn-swiggy-full">
+            🛵 Swiggy Order
+        </a>
+    </section>
+
+    <!-- ================= WHATSAPP ORDER SECTION ================= -->
+    <section class="order-section" id="whatsapp-section">
+        <h2 class="section-title">WhatsApp Order</h2>
+
+        <!-- Note for WhatsApp Orders Box -->
+        <div class="bulk-notice-card">
+            <div class="bulk-notice-header">
+                ⚠️ Note for WhatsApp Orders
+            </div>
+            <p class="bulk-notice-body">
+                WhatsApp Orders require at least <strong>1 hour advance notice</strong> for fresh meat procurement and preparation.
+            </p>
+            <p class="bulk-notice-sub">
+                *Please note: Bulk orders are NOT taken on Swiggy. Contact us directly on WhatsApp or Call.
+            </p>
+        </div>
+
+        <!-- Bulk Rice & Curries -->
+        <div class="category-group">
+            <h3 class="category-title" style="color: #ff9800;">Rice & Curries (Bulk ½ KG / 1 KG)</h3>
+
+            <div class="dish-row">
+                <span class="dish-name">Bagara Rice (HMT)</span>
+                <span class="dish-price">½ KG: ₹150 | 1 KG: ₹300</span>
+            </div>
+            <div class="dish-row">
+                <span class="dish-name">Bagara Rice (Basmati)</span>
+                <span class="dish-price">½ KG: ₹250 | 1 KG: ₹400</span>
+            </div>
+            <div class="dish-row">
+                <span class="dish-name">Chicken Curry</span>
+                <span class="dish-price">½ KG: ₹400 | 1 KG: ₹700</span>
+            </div>
+            <div class="dish-row">
+                <span class="dish-name">Green Chicken Curry</span>
+                <span class="dish-price">½ KG: ₹400 | 1 KG: ₹700</span>
+            </div>
+            <div class="dish-row">
+                <span class="dish-name">Mutton Curry</span>
+                <span class="dish-price">½ KG: ₹900 | 1 KG: ₹1700</span>
+            </div>
+        </div>
+
+        <!-- Special Pre-Order Curries -->
+        <div class="category-group" style="margin-top: 30px;">
+            <h3 class="category-title" style="color: #ff9800;">Special Pre-Order Curries</h3>
+
+            <div class="dish-row">
+                <span class="dish-name">Boti Curry (full)</span>
+                <span class="dish-price">₹900</span>
+            </div>
+            <div class="dish-row">
+                <span class="dish-name">Liver Curry (full)</span>
+                <span class="dish-price">₹900</span>
+            </div>
+            <div class="dish-row">
+                <span class="dish-name">Jalakai Kura (full)</span>
+                <span class="dish-price">₹900</span>
+            </div>
+            <div class="dish-row">
+                <span class="dish-name">Kala Kura / Paya (12 Pcs)</span>
+                <span class="dish-price">₹1600</span>
+            </div>
+        </div>
+
+        <!-- Note for Bulk Orders Box -->
+        <div class="bulk-notice-card">
+            <div class="bulk-notice-header">
+                ⚠️ Note for Bulk Orders
+            </div>
+            <p class="bulk-notice-body">
+                Bulk orders & Special Pre-Orders require at least <strong>48 hours advance notice</strong> for fresh meat procurement and preparation.
+            </p>
+            <p class="bulk-notice-sub">
+                *Please note: Bulk orders are NOT taken on Swiggy. Contact us directly on WhatsApp or Call.
+            </p>
+        </div>
+    </section>
+
+    <!-- Hosting a Gathering Section ("Bulk Orders") -->
+    <section class="gathering-section" id="bulk-section">
+        <div class="gathering-subtitle">HOSTING A GATHERING?</div>
+        <h2 class="gathering-title">Planning an Event or Get-Together?</h2>
+
+        <a href="https://api.whatsapp.com/send?phone=918019976235&text=Hi%2C%20I%20would%20like%20to%20inquire%20about%20a%20bulk%20order." target="_blank" class="btn-whatsapp-full">
+            WhatsApp Bulk Inquiry
+        </a>
+        <a href="tel:8019976235" class="btn-call-outline">
+            Call 8019976235
+        </a>
+    </section>
+
+    <!-- Loved By Local Foodies Reviews (6 Total Reviews) -->
+    <section class="reviews-section">
+        <div class="reviews-subtitle">REAL REVIEWS</div>
+        <h2 class="reviews-title">Loved By Local Foodies</h2>
+
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="star-rating">★★★★★</div>
+                <p class="review-text">
+                    "Reminds me of authentic home cooking! The Signature Talakaya Curry had incredible depth of flavor."
+                </p>
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">SR</div>
+                    <div>
+                        <p class="reviewer-name">Srinivas Rao</p>
+                        <p class="reviewer-status">Verified Customer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <div class="star-rating">★★★★★</div>
+                <p class="review-text">
+                    "Ordered Bagara Rice & Mutton Curry for a family gathering of 10 people. Spices were spot on and perfectly cooked!"
+                </p>
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">KR</div>
+                    <div>
+                        <p class="reviewer-name">Kavitha Reddy</p>
+                        <p class="reviewer-status">Verified Customer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <div class="star-rating">★★★★★</div>
+                <p class="review-text">
+                    "Hard to find fresh Boti Fry & Paya with true homestyle cleanliness in Hyderabad. Highly recommended!"
+                </p>
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">VK</div>
+                    <div>
+                        <p class="reviewer-name">Vijay Kumar</p>
+                        <p class="reviewer-status">Verified Customer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <div class="star-rating">★★★★★</div>
+                <p class="review-text">
+                    "The Gongura Chicken Curry was spicy, tangy, and super fresh. You can tell they ground the masalas fresh daily."
+                </p>
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">AP</div>
+                    <div>
+                        <p class="reviewer-name">Anusha P.</p>
+                        <p class="reviewer-status">Verified Customer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <div class="star-rating">★★★★★</div>
+                <p class="review-text">
+                    "Best Brain Fry and Methi Kheema in the Asifnagar area. Quantity was generous and packed very neatly."
+                </p>
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">MD</div>
+                    <div>
+                        <p class="reviewer-name">Mahesh Dutt</p>
+                        <p class="reviewer-status">Verified Customer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card">
+                <div class="star-rating">★★★★★</div>
+                <p class="review-text">
+                    "Pre-ordered 1 KG Green Chicken for Sunday lunch. Delivery was on time and everybody loved the home-cooked taste."
+                </p>
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">PN</div>
+                    <div>
+                        <p class="reviewer-name">Praveen N.</p>
+                        <p class="reviewer-status">Verified Customer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frequently Asked Questions Section (Interactive Accordion) -->
+    <section class="faq-section">
+        <div class="faq-subtitle">GOT QUESTIONS?</div>
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+            <div class="faq-header">
+                <span class="faq-question">1. Do I need to pre-book any items?</span>
+                <span class="faq-plus">+</span>
+            </div>
+            <div class="faq-answer">
+                Yes — specialized delicacies like liver, boti, paya, and prawns are prepared fresh upon order. Please pre-book them 1–2 hours in advance for small orders or 1–2 days for larger portions. Standard chicken and mutton dishes are available daily on Swiggy.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-header">
+                <span class="faq-question">2. Can I order for a large group or event?</span>
+                <span class="faq-plus">+</span>
+            </div>
+            <div class="faq-answer">
+                Absolutely! We cater bulk family orders and small event gatherings (½ KG & 1 KG options available). Bulk orders require at least 48 hours advance notice so we can procure fresh meat and spices.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-header">
+                <span class="faq-question">3. What are your delivery areas and timings?</span>
+                <span class="faq-plus">+</span>
+            </div>
+            <div class="faq-answer">
+                Our kitchen operates from 10:00 AM to 8:00 PM daily. We deliver locally across Asifnagar, Sitarambhag, and surrounding Hyderabad neighborhoods via Swiggy or direct home pickup.
+            </div>
+        </div>
+    </section>
+
+    <!-- Kitchen Info Footer Section -->
+    <section class="footer-info-section">
+        <h2 class="footer-brand-title">Pushpa's Home Kitchen</h2>
+        <p class="footer-brand-desc">
+            Serving home-style, authentic non-vegetarian delicacies crafted with hand-ground spices and fresh local ingredients.
+        </p>
+
+        <h3 class="footer-info-title">Kitchen Info</h3>
+
+        <div class="info-row">
+            <span>📍</span>
+            <span>Lalitha Nivas, Asifnagar, Sitarambhag Rd., 3rd Floor.</span>
+        </div>
+        <div class="info-row">
+            <span>🗺️</span>
+            <a href="https://maps.app.goo.gl/G7Tq7izq6MVT31Tb6" target="_blank" rel="noopener noreferrer">View on Google Maps</a>
+        </div>
+        <div class="info-row">
+            <span>⏰</span>
+            <span>Delivery Hours: 10:00 AM – 8:00 PM</span>
+        </div>
+        <div class="info-row">
+            <span>📞</span>
+            <span>8019976235 / 9849976235</span>
+        </div>
+        <div class="info-row">
+            <span>💬</span>
+            <span>WhatsApp: 8019976235</span>
+        </div>
+    </section>
+
+</div>
+
+<!-- Sticky Bottom Action Bar -->
+<div class="bottom-action-bar">
+    <a href="tel:8019976235" class="btn-call">
+        📞 Call
+    </a>
+    <a href="https://api.whatsapp.com/send?phone=918019976235&text=Hi%20Pushpa's%20Kitchen!%20I%20would%20like%20to%20book%20an%20order." target="_blank" class="btn-whatsapp-pill">
+        💬 Pre-<br>Book
+    </a>
+    <a href="https://www.swiggy.com" target="_blank" class="btn-swiggy-pill">
+        🛵 Swiggy
+    </a>
+</div>
+
+<!-- JavaScript for Navigation & FAQ Toggle -->
+<script>
+    // Header Menu Dropdown
+    const menuToggle = document.getElementById('menuToggle');
+    const navDropdown = document.getElementById('navDropdown');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navDropdown.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => {
+        if (navDropdown.classList.contains('show')) {
+            navDropdown.classList.remove('show');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navDropdown.classList.remove('show');
+        });
+    });
+
+    // FAQ Accordion Toggle
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const header = item.querySelector('.faq-header');
+        header.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            
+            // Close all other open FAQ items
+            faqItems.forEach(i => i.classList.remove('active'));
+
+            // Toggle clicked item
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
